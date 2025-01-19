@@ -1,46 +1,124 @@
-# Getting Started with Create React App
+# WYSIWYG Editor Component in React
+This is a reusable and flexible WYSIWYG Editor Component built in React, using the draft-js library. The component supports both controlled and uncontrolled modes, with a basic toolbar that provides text formatting options like Bold, Italic, and Underline. It is built with modern React best practices, functional components, and React hooks.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Features
+* Controlled and Uncontrolled Modes:
 
-In the project directory, you can run:
+* The component can be used in controlled mode when both value and onChange props are provided.
+It can also operate in uncontrolled mode when no value prop is passed, managing its internal state.
+Text Formatting:
 
-### `npm start`
+* Supports text formatting options such as Bold, Italic, and Underline.
+Customizable Toolbar:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+* The toolbar can be customized using the renderToolbar prop.
+Async Content Simulation:
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+* Simulates async behavior to fill the editor with content (e.g., fetched from an API).
+Styling Customization:
 
-### `npm test`
+* Basic styling customization using the className and style props.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Installation
+### To get started, clone this repository to your local machine:
+```Shell 
+git clone https://github.com/mohamadobaid97/wysiwyg-editor.git
+```
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Navigate to the project directory:
+```Shell 
+cd wysiwyg-editor
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Install the dependencies:
+```Shell 
+npm install
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+## Usage
+You can use this component in controlled or uncontrolled mode.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Controlled Mode
+In controlled mode, the editor state is managed externally, using value and onChange props.
+```ts 
+import React, { useState } from 'react';
+import WysiwygEditor from './components/WysiwygEditor';
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+const App: React.FC = () => {
+  const [editorContent, setEditorContent] = useState<string | undefined>();
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+  return (
+    <div className='App'>
+      <h2>Controlled Mode</h2>
+      <WysiwygEditor value={editorContent} onChange={setEditorContent} />
+    </div>
+  );
+};
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+export default App;
 
-## Learn More
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Uncontrolled Mode
+In uncontrolled mode, the editor manages its own internal state. You don't need to pass the value and onChange props.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```ts 
+import React from 'react';
+import WysiwygEditor from './components/WysiwygEditor';
+
+const App: React.FC = () => {
+  return (
+    <div className='App'>
+      <h2>Uncontrolled Mode</h2>
+      <WysiwygEditor />
+    </div>
+  );
+};
+
+export default App;
+```
+## Toolbar Customization
+You can customize the toolbar by passing a renderToolbar prop to the WysiwygEditor component. The renderToolbar prop should be a function that receives formatting action handlers (e.g., onBold, onItalic, onUnderline) and returns JSX for the toolbar.
+```ts 
+import React from 'react';
+import WysiwygEditor from './components/WysiwygEditor';
+
+const CustomToolbar: React.FC = ({ onBold, onItalic, onUnderline }) => {
+  return (
+    <div className="custom-toolbar">
+      <button onClick={onBold}>Bold</button>
+      <button onClick={onItalic}>Italic</button>
+      <button onClick={onUnderline}>Underline</button>
+    </div>
+  );
+};
+
+const App: React.FC = () => {
+  return (
+    <div className="App">
+      <h2>Custom Toolbar</h2>
+      <WysiwygEditor renderToolbar={CustomToolbar} />
+    </div>
+  );
+};
+
+export default App;
+
+
+```
+
+## Testing
+Unit tests have been written to verify the functionality of each toolbar action (e.g., bold, italic, underline). You can run the tests using the following command:
+
+```Shell 
+npm test
+```
+
+## Development
+To start the development server and see the editor in action:
+```Shell 
+npm start
+```
