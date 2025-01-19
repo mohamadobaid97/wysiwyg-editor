@@ -1,0 +1,16 @@
+ {
+    "toolbar": {
+      "bold": "Bold",
+      "italic": "Italic",
+      "underline": "Underline"
+    },
+    "editor": {
+      "placeholder": "Start typing below: ",
+      "loading": "Loading,,,"
+    },
+    "app": {
+    "controlledMode": "Controlled Mode",
+    "uncontrolledMode": "Uncontrolled Mode"
+  }
+  }
+  
